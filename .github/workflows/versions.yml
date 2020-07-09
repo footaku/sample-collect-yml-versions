@@ -33,8 +33,8 @@ jobs:
         id: older
         run: echo "::set-output name=versions::$(./.github/scripts/versions.bash)"
 
-      - name: Merged into release
-        if: ${{ github.event_name == 'push'}}
+      - name: Merged into release or Manual trigger
+        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch'}}
         run: echo "::set-env name=TARGET_REF::${{ github.ref }}"
 
       - name: Specified ref
